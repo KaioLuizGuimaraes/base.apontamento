@@ -1,6 +1,5 @@
 import streamlit as st
 import pyodbc
-import pyautogui as pg
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as components
 
@@ -57,8 +56,6 @@ if selected == 'Abrir':
             cursor.execute(comando)
             cursor.commit()
             st.success("Sucesso")
-            pg.sleep(1)
-            pg.press('f5')
 
 if selected == 'Fechar':
     st.title("Fechamento de Atividade")
@@ -96,6 +93,5 @@ if selected == 'Fechar':
             cursor.execute(comando)
             cursor.commit()
             st.success("Sucesso")
-            pg.sleep(1)
-            pg.press('f5')
+
 
