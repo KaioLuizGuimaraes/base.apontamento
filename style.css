@@ -1,0 +1,23 @@
+#MainMenu{
+    visibility: hidden
+    }
+
+
+footer {
+visibility: hidden
+}
+
+.stMarkdown{
+    margin-left: calc(0rem);
+
+}
+
+.menu .nav-item .nav-link.active[data-v-4323f8ce] {
+    background-color: #73df22;
+}
+
+.css-91z34k {
+    width: 100%;
+    padding: 2rem 1rem 10rem;
+    max-width: 100rem;
+}
