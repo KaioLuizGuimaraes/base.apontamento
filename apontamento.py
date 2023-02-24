@@ -44,8 +44,8 @@ if selected == 'Abrir':
             motive = input_mot
             server = 'PC-13'
             database = 'Base_cl'
-            username = 'User\PC-13'
-            password = ''
+            username = 'sa'
+            password = 'cl@123'
             cnxn = pyodbc.connect(
                 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
             cursor = cnxn.cursor()
