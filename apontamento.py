@@ -1,6 +1,6 @@
 import streamlit as st
 import pyodbc
-
+import pyautogui as pg
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as components
 
@@ -43,20 +43,22 @@ if selected == 'Abrir':
             ide = input_id
             atv = input_atv
             motive = input_mot
-            dados_conexao = (
-                "Driver={SQL Server};"
-                "Server=PC-13;"
-                "Database=Base_cl;"
-            )
-            conexao = pyodbc.connect(dados_conexao)
-            cursor = conexao.cursor()
+            server = 'PC-13'
+            database = 'Base_cl'
+            username = 'sa'
+            password = 'cl@123'
+            # ENCRYPT defaults to yes starting in ODBC Driver 18. It's good to always specify ENCRYPT=yes on the client side to avoid MITM attacks.
+            cnxn = pyodbc.connect(
+                'DRIVER={SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=no;UID=' + username + ';PWD=' + password)
+            cursor = cnxn.cursor()
             comando = f"""use Base_cl
                 Insert into info(id, atv, dtini, dtfim, motini, motfim)
                 values({ide},{atv},GETDATE(),0,'{motive}','Processando')"""
             cursor.execute(comando)
             cursor.commit()
             st.success("Sucesso")
-
+            pg.sleep(1)
+            pg.press('f5')
 
 if selected == 'Fechar':
     st.title("Fechamento de Atividade")
@@ -71,13 +73,14 @@ if selected == 'Fechar':
             idf = input_idf
             avi = input_atvi
             motive = input_mtv
-            dados_conexao = (
-                "Driver={SQL Server};"
-                "Server=PC-13;"
-                "Database=Base_cl;"
-            )
-            conexao = pyodbc.connect(dados_conexao)
-            cursor = conexao.cursor()
+            server = 'PC-13'
+            database = 'Base_cl'
+            username = 'sa'
+            password = 'cl@123'
+            # ENCRYPT defaults to yes starting in ODBC Driver 18. It's good to always specify ENCRYPT=yes on the client side to avoid MITM attacks.
+            cnxn = pyodbc.connect(
+                'DRIVER={SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=no;UID=' + username + ';PWD=' + password)
+            cursor = cnxn.cursor()
             comando = f"""update info 
                 set dtfim = case 
                 when id = {idf} and atv = {avi} and motfim = 'Processando' 
@@ -93,4 +96,6 @@ if selected == 'Fechar':
             cursor.execute(comando)
             cursor.commit()
             st.success("Sucesso")
+            pg.sleep(1)
+            pg.press('f5')
 
