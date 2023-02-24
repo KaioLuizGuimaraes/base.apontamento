@@ -44,8 +44,8 @@ if selected == 'Abrir':
             motive = input_mot
             server = 'PC-13'
             database = 'Base_cl'
-            username = 'sa'
-            password = 'cl@123'
+            username = 'User\PC-13'
+            password = ''
             # ENCRYPT defaults to yes starting in ODBC Driver 18. It's good to always specify ENCRYPT=yes on the client side to avoid MITM attacks.
             cnxn = pyodbc.connect(
                 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=no;UID=' + username + ';PWD=' + password)
