@@ -48,7 +48,7 @@ if selected == 'Abrir':
             password = 'cl@123'
             # ENCRYPT defaults to yes starting in ODBC Driver 18. It's good to always specify ENCRYPT=yes on the client side to avoid MITM attacks.
             cnxn = pyodbc.connect(
-                'DRIVER={SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=no;UID=' + username + ';PWD=' + password)
+                'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=no;UID=' + username + ';PWD=' + password)
             cursor = cnxn.cursor()
             comando = f"""use Base_cl
                 Insert into info(id, atv, dtini, dtfim, motini, motfim)
