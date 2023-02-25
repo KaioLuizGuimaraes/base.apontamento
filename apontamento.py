@@ -43,18 +43,21 @@ if selected == 'Abrir':
             ide = input_id
             atv = input_atv
             motive = input_mot
-            @st.cache_resource
-            def init_connection():
-                return mysql.connector.connect(**st.secrets["mysql"])
-            conn = init_connection()
-            @st.cache_data(ttl=600)
-            def run_query(query):
-                with conn.cursor() as cur:
-                    cur.execute(query)
-                    return cur.fetchall()
-            rows = run_query("SELECT * from info;")
-            for row in rows:
-                st.write(f"{row[0]} has a :{row[1]}:")
+            conexao = py.connect(
+        "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
+        + st.secrets["PC-13"]
+        + ";DATABASE="
+        + st.secrets["Base.cl"]
+        + ";UID="
+        + st.secrets["bd.kaio"]
+        + ";PWD="
+        + st.secrets["cl@123"] )
+            cursor = conexao.cursor()
+            comando = f"""use Base_cl
+                            Insert into info(id, atv, dtini, dtfim, motini, motfim)
+                            values(66,99,GETDATE(),0,'teste','Processando')"""
+            cursor.execute(comando)
+            cursor.commit()
             st.success("Sucesso")
 
 if selected == 'Fechar':
