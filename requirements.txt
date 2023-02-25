@@ -45,6 +45,7 @@ PyGetWindow==0.0.9
 Pygments==2.14.0
 Pympler==1.0.1
 PyMsgBox==1.0.9
+pymssql==2.2.7
 pyodbc==4.0.35
 pyparsing==3.0.9
 pyperclip==1.8.2
@@ -82,4 +83,3 @@ validators==0.20.0
 watchdog==2.3.0
 wsproto==1.2.0
 zipp==3.14.0
-
