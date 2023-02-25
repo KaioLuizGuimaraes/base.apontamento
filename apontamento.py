@@ -44,7 +44,7 @@ if selected == 'Abrir':
             atv = input_atv
             motive = input_mot
             conexao = pyodbc.connect(
-        "DRIVER={SQL Server};SERVER="
+        "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
         + st.secrets["server"]
         + ";DATABASE="
         + st.secrets["database"]
