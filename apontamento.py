@@ -2,6 +2,7 @@ import streamlit as st
 import pyodbc
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as components
+import mysql.connector
 
 with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -42,21 +43,18 @@ if selected == 'Abrir':
             ide = input_id
             atv = input_atv
             motive = input_mot
-            pyodbc.connect(
-                "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
-                + st.secrets["server"]
-                + ";DATABASE="
-                + st.secrets["database"]
-                + ";UID="
-                + st.secrets["username"]
-                + ";PWD="
-                + st.secrets["password"])
-            comando = init_connection()
-            comando = f"""use Base_cl
-                Insert into info(id, atv, dtini, dtfim, motini, motfim)
-                values({ide},{atv},GETDATE(),0,'{motive}','Processando')"""
-            cursor.execute(comando)
-            cursor.commit()
+            @st.cache_resource
+            def init_connection():
+                return mysql.connector.connect(**st.secrets["mysql"])
+            conn = init_connection()
+            @st.cache_data(ttl=600)
+            def run_query(query):
+                with conn.cursor() as cur:
+                    cur.execute(query)
+                    return cur.fetchall()
+            rows = run_query("SELECT * from info;")
+            for row in rows:
+                st.write(f"{row[0]} has a :{row[1]}:")
             st.success("Sucesso")
 
 if selected == 'Fechar':
@@ -76,7 +74,6 @@ if selected == 'Fechar':
             database = 'Base_cl'
             username = 'sa'
             password = 'cl@123'
-            # ENCRYPT defaults to yes starting in ODBC Driver 18. It's good to always specify ENCRYPT=yes on the client side to avoid MITM attacks.
             cnxn = pyodbc.connect(
                 'DRIVER={SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=no;UID=' + username + ';PWD=' + password)
             cursor = cnxn.cursor()
@@ -95,5 +92,3 @@ if selected == 'Fechar':
             cursor.execute(comando)
             cursor.commit()
             st.success("Sucesso")
-
-
