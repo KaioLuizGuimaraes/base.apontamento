@@ -1,8 +1,8 @@
 import streamlit as st
-import pyodbc
+import pyodbc as py
+import pyautogui as pg
 from streamlit_option_menu import option_menu
 import streamlit.components.v1 as components
-import mysql.connector
 
 with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -43,22 +43,21 @@ if selected == 'Abrir':
             ide = input_id
             atv = input_atv
             motive = input_mot
-            conexao = pyodbc.connect(
-        "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
-        + st.secrets["server"]
-        + ";DATABASE="
-        + st.secrets["database"]
-        + ";UID="
-        + st.secrets["user"]
-        + ";PWD="
-        + st.secrets["password"] )
+            dados_conexao = (
+                "Driver={SQL Server};"
+                "Server=PC-13;"
+                "Database=Base_cl;"
+            )
+            conexao = py.connect(dados_conexao)
             cursor = conexao.cursor()
             comando = f"""use Base_cl
-                            Insert into info(id, atv, dtini, dtfim, motini, motfim)
-                            values(66,99,GETDATE(),0,'teste','Processando')"""
+                Insert into info(id, atv, dtini, dtfim, motini, motfim)
+                values({ide},{atv},GETDATE(),0,'{motive}','Processando')"""
             cursor.execute(comando)
             cursor.commit()
             st.success("Sucesso")
+            pg.sleep(1)
+            pg.press('f5')
 
 if selected == 'Fechar':
     st.title("Fechamento de Atividade")
@@ -73,13 +72,13 @@ if selected == 'Fechar':
             idf = input_idf
             avi = input_atvi
             motive = input_mtv
-            server = 'PC-13'
-            database = 'Base_cl'
-            username = 'sa'
-            password = 'cl@123'
-            cnxn = pyodbc.connect(
-                'DRIVER={SQL Server};SERVER=' + server + ';DATABASE=' + database + ';ENCRYPT=no;UID=' + username + ';PWD=' + password)
-            cursor = cnxn.cursor()
+            dados_conexao = (
+                "Driver={SQL Server};"
+                "Server=PC-13;"
+                "Database=Base_cl;"
+            )
+            conexao = py.connect(dados_conexao)
+            cursor = conexao.cursor()
             comando = f"""update info 
                 set dtfim = case 
                 when id = {idf} and atv = {avi} and motfim = 'Processando' 
@@ -95,3 +94,5 @@ if selected == 'Fechar':
             cursor.execute(comando)
             cursor.commit()
             st.success("Sucesso")
+            pg.sleep(1)
+            pg.press('f5')
