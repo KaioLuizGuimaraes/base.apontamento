@@ -45,13 +45,13 @@ if selected == 'Abrir':
             motive = input_mot
             conexao = pyodbc.connect(
         "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
-        + st.secrets["server "]
+        + st.secrets["server"]
         + ";DATABASE="
-        + st.secrets["database "]
+        + st.secrets["database"]
         + ";UID="
         + st.secrets["user"]
         + ";PWD="
-        + st.secrets["password "] )
+        + st.secrets["password"] )
             cursor = conexao.cursor()
             comando = f"""use Base_cl
                             Insert into info(id, atv, dtini, dtfim, motini, motfim)
