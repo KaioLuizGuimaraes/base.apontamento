@@ -42,13 +42,16 @@ if selected == 'Abrir':
             ide = input_id
             atv = input_atv
             motive = input_mot
-            server = 'PC-13'
-            database = 'Base_cl'
-            username = 'bd.kaio'
-            password = 'cl@123'
-            cnxn = pyodbc.connect(
-                'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
-            cursor = cnxn.cursor()
+            return pyodbc.connect(
+                "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
+                + st.secrets["server"]
+                + ";DATABASE="
+                + st.secrets["database"]
+                + ";UID="
+                + st.secrets["username"]
+                + ";PWD="
+                + st.secrets["password"])
+            comando = init_connection()
             comando = f"""use Base_cl
                 Insert into info(id, atv, dtini, dtfim, motini, motfim)
                 values({ide},{atv},GETDATE(),0,'{motive}','Processando')"""
