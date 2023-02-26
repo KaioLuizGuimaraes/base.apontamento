@@ -44,7 +44,7 @@ if selected == 'Abrir':
             motive = input_mot
             dados_conexao = (
                 "Driver={ODBC Driver 17 for SQL Server};"
-                "Server=PC-13;"
+                "Server=192.168.2.52\PC-13;"
                 "PORT=1433;"
                 "Database=Base.cl;"
             )
