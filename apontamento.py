@@ -45,7 +45,7 @@ if selected == 'Abrir':
             dados_conexao = (
                 "Driver={ODBC Driver 17 for SQL Server};"
                 "Server=PC-13;"
-                "Database=Base.cl;""
+                "Database=Base.cl;"
             )
             conexao = py.connect(dados_conexao)
             cursor = conexao.cursor()
