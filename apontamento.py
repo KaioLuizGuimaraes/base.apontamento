@@ -48,7 +48,6 @@ if selected == 'Abrir':
                 "PORT=49172;"
                 "Database=Base.cl;"
                 "UID=PC-13\UserCL;"
-                "PWD=''"
             )
             conexao = py.connect(dados_conexao)
             cursor = conexao.cursor()
