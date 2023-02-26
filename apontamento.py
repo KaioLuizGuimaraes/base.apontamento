@@ -43,13 +43,13 @@ if selected == 'Abrir':
             atv = input_atv
             motive = input_mot
             dados_conexao = (
-                "Driver={SQL Server};"
+                "Driver={ODBC Driver 17 for SQL Server};"
                 "Server=PC-13;"
-                "Database=Base_cl;"
+                "Database=Base.cl;""
             )
             conexao = py.connect(dados_conexao)
             cursor = conexao.cursor()
-            comando = f"""use Base_cl
+            comando = f"""use [Base.cl]
                 Insert into info(id, atv, dtini, dtfim, motini, motfim)
                 values({ide},{atv},GETDATE(),0,'{motive}','Processando')"""
             cursor.execute(comando)
