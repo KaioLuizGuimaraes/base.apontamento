@@ -43,9 +43,9 @@ if selected == 'Abrir':
             atv = input_atv
             motive = input_mot
             dados_conexao = (
-                "Driver={ODBC Driver 17 for SQL Server};"
-                "tcp:<PC-13,49172>
-                "Database=Base.cl;"
+                "Driver={SQL Server};"
+                "Server=PC-13,49172;"
+                "Database=Base_cl;"
             )
             conexao = py.connect(dados_conexao)
             cursor = conexao.cursor()
