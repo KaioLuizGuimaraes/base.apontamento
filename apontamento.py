@@ -43,7 +43,7 @@ if selected == 'Abrir':
             atv = input_atv
             motive = input_mot
             dados_conexao = (
-                "Driver={ODBC Driver 17for SQL Server};"
+                "Driver={ODBC Driver 17 for SQL Server};"
                 "Server=PC-13,49172;"
                 "Database=Base_cl;"
             )
