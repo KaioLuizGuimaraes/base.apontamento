@@ -48,7 +48,7 @@ if selected == 'Abrir':
                 # IP ou nome do servidor.
                 'SERVER=192.168.2.52;'
                 # Porta
-                'PORT=8501;'
+                'PORT=49172;'
                 # Banco que será utilizado.
                 'DATABASE=Base_cl;'
                 # Nome de usuário.
