@@ -46,9 +46,9 @@ if selected == 'Abrir':
                 # Driver que será utilizado na conexão
                 'DRIVER={ODBC Driver 17 for SQL Server};'
                 # IP ou nome do servidor.
-                'SERVER=177.103.163.165;'
+                'SERVER=192.168.2.52;'
                 # Porta
-                'PORT=1433;'
+                'PORT=8501;'
                 # Banco que será utilizado.
                 'DATABASE=Base_cl;'
                 # Nome de usuário.
